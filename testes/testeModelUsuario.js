@@ -1,8 +1,10 @@
 const { sequelize, Usuario } = require('../models');
 
-Usuario.findAll().then(
+Usuario.findAll({include:'posts'}).then(
     data => {
-        console.log(data.map( u => u.toJSON()));
+        console.log(data[0].posts[0].toJSON());
+        // console.log(data.map( u => u.toJSON()));
         sequelize.close();
     }
 )
+
