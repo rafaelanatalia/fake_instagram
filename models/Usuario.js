@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
             tableName:"usuarios",
             timestamps:false
         }
-    )
+    );
+
+    usuario.associate = (models) => {
+        usuario.hasMany(models.Post,{as:"posts",foreignKey:'usuarios_id'});
+    }
 
     return usuario;
     
