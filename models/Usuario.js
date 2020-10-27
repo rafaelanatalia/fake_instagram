@@ -15,6 +15,15 @@ module.exports = (sequelize, DataTypes) => {
     // Representar relacionamento usuário->posts
     usuario.associate = (models) => {
         usuario.hasMany(models.Post, {as: 'posts', foreignKey: 'usuarios_id'});
+        usuario.belongsToMany(
+            models.Post,
+            {
+                as:'curtiu',
+                through: 'curtidas',
+                foreignKey: 'usuarios_id',
+                otherKey: 'posts_id'
+            }
+        )
     }
 
     return usuario;

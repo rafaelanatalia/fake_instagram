@@ -20,6 +20,15 @@ module.exports = (sequelize, DataTypes) => {
 
     post.associate = (models) =>{
         post.belongsTo(models.Usuario,{as:'usuario', foreignKey:'usuarios_id'});
+        post.hasMany(models.Comentario,{as:'comentarios', foreignKey:'posts_id'});
+        post.belongsToMany(
+            models.Usuario,{
+                as:'curtiram',
+                through:'curtidas',
+                foreignKey:'posts_id',
+                otherKey:'usuarios_id',
+            }
+        )
     }
 
     return post;

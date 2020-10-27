@@ -7,8 +7,9 @@ const { sequelize, Post } = require('../models');
 //     }
 // )
 
-Post.findByPk(2,{include:'usuario'}).then(
+Post.findByPk(2,{include:['usuario','comentarios','curtiram']}).then(
     post => {
-        console.log(post.toJSON());
+        console.log(post.curtiram[0].toJSON());
+        process.exit();
     }
 )
