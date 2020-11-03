@@ -10,8 +10,11 @@ module.exports = {
                 n_likes: 0
             });
 
-        // post.save();
+        // Quero que, ao inves de retornar um JSON com as info enviadas
+        // redirecione o visitante para a págida de /home
+        res.redirect('/home');
 
-        res.send(JSON.stringify(req.body));
+        // res.render('index'); // NÃO É ISSO QUE a gente quer.
+        
     }
 }

@@ -1,3 +1,6 @@
+const PostsController = require("./PostsController");
+const { Post } = require("../models");
+
 const AuthController = {
     
     showLogin: (req,res) => {
@@ -8,8 +11,14 @@ const AuthController = {
         res.render('auth/register');
     },
 
-    showHome: (req,res) => {
-        res.render('index');
+    showHome: async (req,res) => {
+
+        // Levantar posts com seus respectivos comentarios, autor e curtidas
+        let posts = await Post.findAll({include:['usuario','comentarios','curtiram']});
+        console.log(posts[0].toJSON());
+
+        // Enviar estes posts para a view index
+        res.render('index', {posts});
     }
 
 
