@@ -1,12 +1,12 @@
-const { sequelize, Post } = require('../models');
+const { sequelize, Comentario } = require('../models');
 
-Post.findByPk(1).then(
-    post => {
-        post.getComentarios().then(
-            (comentarios) => {
-                console.log(comentarios.map(comentario => comentario.toJSON()));
-                sequelize.close();
-            }
-        );
+let promessa = Comentario.findAll({include:'post'});
+
+promessa.then(
+    dados => {
+        console.log(dados.map(c=>c.toJSON()));
+        sequelize.close();
     }
-)
+);
+
+console.log("Já foi!");
